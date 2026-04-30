@@ -1,21 +1,30 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { LayoutDashboard, Home, PlusCircle, User, LogOut } from "lucide-react";
+import { LayoutDashboard, Home, PlusCircle, User, LogOut, RefreshCw } from "lucide-react";
 import toast from "react-hot-toast";
 
 const LINKS = [
   { href: "/dashboard",              label: "Dashboard",   icon: LayoutDashboard, exact: true },
-  { href: "/dashboard/listings",     label: "My Listings", icon: Home },
-  { href: "/dashboard/add-listing",  label: "Add Listing", icon: PlusCircle },
+  { href: "/dashboard/listings",     label: "My Listings", icon: Home,       exact: true },
+  { href: "/dashboard/listings/add", label: "Add Listing", icon: PlusCircle, exact: true },
   // { href: "/dashboard/leads",        label: "Leads",       icon: Users },
   { href: "/dashboard/profile",      label: "Profile",     icon: User },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { logout, user, dealer } = useAuth();
+  const { logout, user, dealer, refreshUser } = useAuth();
+
+  const [refreshing, setRefreshing] = useState(false);
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await refreshUser();
+    setRefreshing(false);
+    toast.success("Status updated");
+  };
 
   const handleLogout = async () => {
     await logout();
@@ -58,14 +67,18 @@ export default function Sidebar() {
             </div>
           )}
         </div>
-        <div
-          className={`mt-2 inline-block text-xs font-semibold px-2 py-0.5 rounded-full border ${
+        <div className="mt-2 flex items-center gap-1.5">
+          <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${
             dealer?.status === "ACTIVE"
               ? "bg-emerald-50 text-emerald-700 border-emerald-200"
               : "bg-amber-50 text-amber-700 border-amber-200"
-          }`}
-        >
-          {dealer?.status || "PENDING"} · {dealer?.package || "BASIC"}
+          }`}>
+            {dealer?.status || "PENDING"} · {dealer?.package || "BASIC"}
+          </span>
+          <button type="button" onClick={handleRefresh} title="Refresh status"
+            className="text-gray-400 hover:text-emerald-600 transition-colors">
+            <RefreshCw size={12} className={refreshing ? "animate-spin" : ""} />
+          </button>
         </div>
       </div>
 

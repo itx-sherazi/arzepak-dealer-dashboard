@@ -28,7 +28,7 @@ export default function EditListingPage() {
     purpose: "SALE", type: "HOUSE", city: "Lahore", areaName: "", address: "",
     title: "", description: "", area: "", areaUnit: "MARLA",
     bedrooms: "", bathrooms: "", floors: "", furnishing: "UNFURNISHED", buildYear: "",
-    amenities: [] as string[], images: [] as ImageRef[], price: "",
+    amenities: [] as string[], images: [] as ImageRef[], price: "", videoUrl: "",
   });
 
   // Track which image slots are being replaced (index → uploading flag)
@@ -64,6 +64,7 @@ export default function EditListingPage() {
           amenities: p.amenities || [],
           images: normalizedImages,
           price: String(p.price || ""),
+          videoUrl: (p as PropertyData & { videoUrl?: string }).videoUrl || "",
         });
       } catch { toast.error("Failed to load property"); }
       setLoading(false);

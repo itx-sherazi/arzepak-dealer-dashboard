@@ -42,7 +42,7 @@ export default function ListingsPage() {
           <h1 className="text-2xl font-bold text-gray-800">My Listings</h1>
           <p className="text-gray-500 text-sm">{data?.total ?? 0} properties</p>
         </div>
-        <Link href="/dashboard/add-listing" className="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 w-fit">
+        <Link href="/dashboard/listings/add" className="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 w-fit">
           <PlusCircle size={16} /> Add Listing
         </Link>
       </div>
@@ -59,7 +59,7 @@ export default function ListingsPage() {
         <div className="bg-white rounded-2xl p-12 text-center shadow-sm border border-gray-100">
           <div className="text-5xl mb-3">🏠</div>
           <h3 className="font-semibold text-gray-700">No listings found</h3>
-          <Link href="/dashboard/add-listing" className="inline-block mt-4 bg-green-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold">Add First Listing</Link>
+          <Link href="/dashboard/listings/add" className="inline-block mt-4 bg-green-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold">Add First Listing</Link>
         </div>
       ) : (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">

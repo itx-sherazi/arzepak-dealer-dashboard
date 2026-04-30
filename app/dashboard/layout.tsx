@@ -51,28 +51,32 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      <div className="hidden lg:flex shrink-0">
+    <div className="flex h-screen overflow-hidden bg-gray-50">
+      {/* Sticky sidebar — desktop */}
+      <div className="hidden lg:flex shrink-0 sticky top-0 h-screen overflow-y-auto">
         <Sidebar />
       </div>
 
+      {/* Mobile sidebar overlay */}
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-black/50" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 top-0 bottom-0 w-64 z-10">
+          <div className="absolute left-0 top-0 bottom-0 w-64 z-10 overflow-y-auto">
             <Sidebar />
           </div>
         </div>
       )}
 
-      <div className="flex-1 flex flex-col min-w-0">
+      {/* Main scrollable area */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
+        {/* Mobile top bar */}
         <div className="lg:hidden flex items-center gap-3 bg-white/90 backdrop-blur px-4 py-3 sticky top-0 z-30 border-b border-slate-200">
           <button type="button" onClick={() => setOpen(true)} className="text-slate-900">
             <Menu size={22} />
           </button>
           <span className="text-slate-900 font-bold text-sm">arzepak Dealer</span>
         </div>
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-auto">{children}</main>
+        <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
       </div>
     </div>
   );

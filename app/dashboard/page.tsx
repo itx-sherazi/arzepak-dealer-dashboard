@@ -37,7 +37,7 @@ export default function DashboardHome() {
           <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
           <p className="text-gray-500 text-sm">Welcome back! Here&apos;s your overview.</p>
         </div>
-        <Link href="/dashboard/add-listing"
+        <Link href="/dashboard/listings/add"
           className="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 shadow">
           <PlusCircle size={16} /> Add Listing
         </Link>
