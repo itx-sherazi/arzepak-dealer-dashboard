@@ -11,13 +11,13 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(false);
   const [uploadingLogo, setUploadingLogo] = useState(false);
 
-  const [form, setForm] = useState({ agencyName: "", bio: "", whatsapp: "", city: "Lahore", areasServed: "", experience: "0", logo: "" });
+  const [form, setForm] = useState({ agencyName: "", bio: "", whatsapp: "", phone: "", city: "Lahore", areasServed: "", experience: "0", logo: "" });
   const [userForm, setUserForm] = useState({ name: "", phone: "" });
   const [pwForm, setPwForm] = useState({ currentPassword: "", newPassword: "", confirm: "" });
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (dealer) setForm({ agencyName: dealer.agencyName||"", bio: dealer.bio||"", whatsapp: dealer.whatsapp||"", city: dealer.city||"Lahore", areasServed: (dealer.areasServed||[]).join(", "), experience: String(dealer.experience||0), logo: dealer.logo||"" });
+    if (dealer) setForm({ agencyName: dealer.agencyName||"", bio: dealer.bio||"", whatsapp: dealer.whatsapp||"", phone: dealer.phone||"", city: dealer.city||"Lahore", areasServed: (dealer.areasServed||[]).join(", "), experience: String(dealer.experience||0), logo: dealer.logo||"" });
     if (user) setUserForm({ name: user.name, phone: user.phone||"" });
   }, [dealer, user]);
 
@@ -128,7 +128,7 @@ export default function ProfilePage() {
 
       <form onSubmit={saveDealer} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
         <h2 className="font-bold text-gray-800">Dealer Information</h2>
-        {[{l:"Agency Name",k:"agencyName",p:"City Properties"},{l:"WhatsApp",k:"whatsapp",p:"923XX-XXXXXXX"},{l:"Experience (years)",k:"experience",p:"5"}].map(f=>(
+        {[{l:"Agency Name",k:"agencyName",p:"City Properties"},{l:"WhatsApp Number",k:"whatsapp",p:"923XXXXXXXXX (with country code)"},{l:"Call / Local Number",k:"phone",p:"03XXXXXXXXX"},{l:"Experience (years)",k:"experience",p:"5"}].map(f=>(
           <div key={f.k}><label className={lbl}>{f.l}</label><input type="text" placeholder={f.p} value={form[f.k as keyof typeof form]} onChange={e=>setForm({...form,[f.k]:e.target.value})} className={inp} /></div>
         ))}
         <div><label className={lbl}>City</label><select value={form.city} onChange={e=>setForm({...form,city:e.target.value})} className={inp}>{CITIES.map(c=><option key={c}>{c}</option>)}</select></div>

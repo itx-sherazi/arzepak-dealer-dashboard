@@ -4,7 +4,7 @@ import api from "@/lib/api";
 import { clearStoredToken } from "@/lib/authToken";
 
 export interface User { _id: string; name: string; email: string; phone?: string; role: "USER"|"DEALER"|"ADMIN"; avatar?: string; isBanned: boolean; }
-export interface Dealer { _id: string; agencyName?: string; status: string; package: string; city: string; isVerified: boolean; bio?: string; whatsapp?: string; areasServed?: string[]; experience?: number; logo?: string; totalListings: number; totalLeads: number; totalViews: number; avgRating: number; }
+export interface Dealer { _id: string; agencyName?: string; status: string; package: string; city: string; isVerified: boolean; bio?: string; whatsapp?: string; phone?: string; areasServed?: string[]; experience?: number; logo?: string; totalListings: number; totalLeads: number; totalViews: number; avgRating: number; }
 
 interface AuthCtx {
   user: User | null;
